@@ -429,10 +429,21 @@ sup > a::before,
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
 }
-.navbar .dropdown-collapse,
-.top-nav-collapse,
-.navbar-col-show {
-  background-color: var(--navbar-bg-color);
+@supports (-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px)) {
+  .navbar .dropdown-collapse,
+  .top-nav-collapse,
+  .navbar-col-show {
+    background: rgba(236,115,87,0.7);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+}
+@supports not ((-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px))) {
+  .navbar .dropdown-collapse,
+  .top-nav-collapse,
+  .navbar-col-show {
+    background: #ec7357;
+  }
 }
 @media (max-width: 767px) {
   .navbar {
@@ -841,14 +852,14 @@ i.iconfont {
   --post-text-color: #2c3e50;
   --post-heading-color: #1a202c;
   --post-link-color: #0366d6;
-  --link-hover-color: #30a9de;
+  --link-hover-color: #f26d5b;
   --link-hover-bg-color: #f8f9fa;
   --line-color: #eaecef;
-  --navbar-bg-color: #2f4154;
+  --navbar-bg-color: #EC7357;
   --navbar-text-color: #fff;
   --subtitle-color: #fff;
-  --scrollbar-color: #c4c6c9;
-  --scrollbar-hover-color: #a6a6a6;
+  --scrollbar-color: #f9a11b;
+  --scrollbar-hover-color: #a79c8e;
   --button-bg-color: transparent;
   --button-hover-bg-color: #f2f3f5;
   --highlight-bg-color: #f6f8fa;
@@ -861,21 +872,21 @@ i.iconfont {
     --color-mode: "dark";
   }
   :root:not([data-user-color-scheme]) {
-    --body-bg-color: #181c27;
-    --board-bg-color: #252d38;
+    --body-bg-color: #1F2124;
+    --board-bg-color: #383A3F;
     --text-color: #c4c6c9;
     --sec-text-color: #a7a9ad;
     --post-text-color: #c4c6c9;
     --post-heading-color: #c4c6c9;
     --post-link-color: #1589e9;
-    --link-hover-color: #30a9de;
+    --link-hover-color: #f26d5b;
     --link-hover-bg-color: #364151;
     --line-color: #435266;
-    --navbar-bg-color: #1f3144;
+    --navbar-bg-color: #CE6D39;
     --navbar-text-color: #d0d0d0;
     --subtitle-color: #d0d0d0;
-    --scrollbar-color: #687582;
-    --scrollbar-hover-color: #9da8b3;
+    --scrollbar-color: #fdc23e;
+    --scrollbar-hover-color: #fff1b9;
     --button-bg-color: transparent;
     --button-hover-bg-color: #46647e;
     --highlight-bg-color: #303030;
@@ -888,6 +899,22 @@ i.iconfont {
     filter: brightness(0.9);
     transition: filter 0.2s ease-in-out;
   }
+  @supports (-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px)) {
+    :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
+    :root:not([data-user-color-scheme]) .top-nav-collapse,
+    :root:not([data-user-color-scheme]) .navbar-col-show {
+      background: rgba(206,109,57,0.7);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+    }
+  }
+  @supports not ((-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px))) {
+    :root:not([data-user-color-scheme]) .navbar .dropdown-collapse,
+    :root:not([data-user-color-scheme]) .top-nav-collapse,
+    :root:not([data-user-color-scheme]) .navbar-col-show {
+      background: #ce6d39;
+    }
+  }
   :root:not([data-user-color-scheme]) .license-box {
     background-color: rgba(62,75,94,0.35);
     transition: background-color 0.2s ease-in-out;
@@ -899,21 +926,21 @@ i.iconfont {
 }
 @media not print {
   [data-user-color-scheme="dark"] {
-    --body-bg-color: #181c27;
-    --board-bg-color: #252d38;
+    --body-bg-color: #1F2124;
+    --board-bg-color: #383A3F;
     --text-color: #c4c6c9;
     --sec-text-color: #a7a9ad;
     --post-text-color: #c4c6c9;
     --post-heading-color: #c4c6c9;
     --post-link-color: #1589e9;
-    --link-hover-color: #30a9de;
+    --link-hover-color: #f26d5b;
     --link-hover-bg-color: #364151;
     --line-color: #435266;
-    --navbar-bg-color: #1f3144;
+    --navbar-bg-color: #CE6D39;
     --navbar-text-color: #d0d0d0;
     --subtitle-color: #d0d0d0;
-    --scrollbar-color: #687582;
-    --scrollbar-hover-color: #9da8b3;
+    --scrollbar-color: #fdc23e;
+    --scrollbar-hover-color: #fff1b9;
     --button-bg-color: transparent;
     --button-hover-bg-color: #46647e;
     --highlight-bg-color: #303030;
@@ -925,6 +952,22 @@ i.iconfont {
     -webkit-filter: brightness(0.9);
     filter: brightness(0.9);
     transition: filter 0.2s ease-in-out;
+  }
+  @supports (-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px)) {
+    [data-user-color-scheme="dark"] .navbar .dropdown-collapse,
+    [data-user-color-scheme="dark"] .top-nav-collapse,
+    [data-user-color-scheme="dark"] .navbar-col-show {
+      background: rgba(206,109,57,0.7);
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+    }
+  }
+  @supports not ((-webkit-backdrop-filter: blur(3px)) or (backdrop-filter: blur(3px))) {
+    [data-user-color-scheme="dark"] .navbar .dropdown-collapse,
+    [data-user-color-scheme="dark"] .top-nav-collapse,
+    [data-user-color-scheme="dark"] .navbar-col-show {
+      background: #ce6d39;
+    }
   }
   [data-user-color-scheme="dark"] .license-box {
     background-color: rgba(62,75,94,0.35);
