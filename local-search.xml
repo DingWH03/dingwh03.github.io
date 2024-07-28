@@ -4,6 +4,64 @@
   
   
   <entry>
+    <title>编程基础——C++语言基础知识</title>
+    <link href="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <url>/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<h1>C++语言基础知识</h1><h2 id="一、控制台程序的基本结构">一、控制台程序的基本结构</h2><p>这是最简单的helloworld代码，#开头的是预处理语句，可以用来包含一些库文件，<code>using namespace std;</code>这个语句表明这段程序使用namespace的用户空间，不去详细说但在刚开始学的阶段建议加上这一行。<code>int main()</code>定义出了主函数，一个完整的程序一定要有至少一个主函数。<code>int main()</code>中的<code>int</code>表示返回值类型，所以这个函数最后一行是一个return 0;也就是返回0。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>      cout&lt;&lt;<span class="hljs-string">&quot;Hello world!!!&quot;</span>&lt;&lt;endl;<br>      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>后面编写程序都先从这个框架开始。</p><h2 id="二、输入输出语句">二、输入输出语句</h2><h3 id="（1）输出语句cout">（1）输出语句cout</h3><h3 id="（2）输入语句cin">（2）输入语句cin</h3><h2 id="三、变量和常量">三、变量和常量</h2><h3 id="（1）常量">（1）常量</h3><h4 id="1-整数">1. 整数</h4><h4 id="2-浮点数">2. 浮点数</h4><h3 id="（2）变量">（2）变量</h3><h4 id="1-整型">1. 整型</h4><h4 id="2-浮点型">2. 浮点型</h4><h4 id="3-布尔型">3. 布尔型</h4><h4 id="4-字符型">4. 字符型</h4><h4 id="5-字符串类型">5. 字符串类型</h4><h2 id="四、基本程序结构">四、基本程序结构</h2><h3 id="（1）顺序结构">（1）顺序结构</h3><h3 id="（2）选择结构">（2）选择结构</h3><h3 id="（3）循环结构">（3）循环结构</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>C++基础</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>编程基础</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>语言基础</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>编程基础——C++开发与学习环境搭建</title>
+    <link href="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <url>/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+    
+    <content type="html"><![CDATA[<h1>C++开发与学习环境搭建</h1><blockquote><p>零门槛初识C++，用最简单的方式开始自己的第一行代码。</p></blockquote><h2 id="一、下载编译器-IDE-文本编辑器">一、下载编译器/IDE/文本编辑器</h2><p>为了方便起见，微软的经典集成开发环境Visual C++ 6.0非常适合入门，这里提供<a href="https://wwt.lanzouw.com/iV5Qp25s8xjg">下载链接</a>。</p><h2 id="二、安装Visual-C-6-0">二、安装Visual C++ 6.0</h2><p>1.双击安装包运行安装程序</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/1.png" class="" title="无描述"><p>2.点击下一步</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/2.png" class="" title="无描述"><p>3.修改安装路径，如果不想安装到C盘自行进行修改</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/3.png" class="" title="无描述"><p>4.快捷方式的勾默认打上，点击下一步</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/4.png" class="" title="无描述"><p>5.点击安装</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/5.png" class="" title="无描述"><p>6.安装完成点击完成，此时软件主界面应打开</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/6.png" class="" title="无描述"><p>7.主页面如下图</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/7.png" class="" title="无描述"><h2 id="三、创建项目">三、创建项目</h2><p>一个项目代表一个程序。</p><p>1.点击左上角FIle-&gt;New</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/8.png" class="" title="无描述"><p>2.在弹出窗口中选择Project-&gt;Win32 Console Applications</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/9.png" class="" title="无描述"><p>3.在窗口右侧给项目起名字，并为项目选择路径，路径默认即可。</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/10.png" class="" title="无描述"><p>4.下面的页面一般选择第一个即可，但我们这里选择第三个，因为第三个选项内置了几行代码。</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/11.png" class="" title="无描述"><p>5.下面点击OK</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/12.png" class="" title="无描述"><p>6.进入代码编辑页面</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/13.png" class="" title="无描述"><h2 id="四、界面-窗口介绍">四、界面/窗口介绍</h2><p>点击下方图中File View可以查看项目的文件，C++语言的代码一般头文件使用.hpp或者.h后缀，源程序本体则是.cpp，至于什么是头文件，与.cpp文件有什么区别，后面便知道。</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/14.png" class="" title="无描述"><p>屏幕左侧显示文件，屏幕右侧显示代码编辑窗口，屏幕上方是菜单和工具栏。</p><h2 id="五、运行代码">五、运行代码</h2><p>点击上方菜单中的Build-&gt;Execute test1.exe即可执行编写的代码。</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/17.png" class="" title="无描述"><p>如果弹出下面的窗口点击是即可，这个窗口的含义是还没有编译程序，是否进行编译。</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/18.png" class="" title="无描述"><p>如出现兼容性问题如下图，勾选<code>不再显示此消息</code>后点击<code>运行而不获取帮助</code>即可运行。</p><img src="/2024/07/28/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94C-%E5%BC%80%E5%8F%91%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/19.png" class="" title="无描述">]]></content>
+    
+    
+    <categories>
+      
+      <category>C++基础</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>编程基础</tag>
+      
+      <tag>C++</tag>
+      
+      <tag>开发环境</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>数据结构——源代码合集</title>
     <link href="/2024/07/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E6%BA%90%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/"/>
     <url>/2024/07/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E6%BA%90%E4%BB%A3%E7%A0%81%E5%90%88%E9%9B%86/</url>
