@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
   
-    <link rel="canonical" href="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt校园网自动认证-双WAN配置/"/>
+    <link rel="canonical" href="https://blog.cxhap.top/2024/08/16/计算机网络——网络层/"/>
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -23,35 +23,24 @@
   <meta name="author" content="DingWH03">
   <meta name="keywords" content="">
   
-    <meta name="description" content="OpenWrt校园网自动认证+双WAN配置 最近换了新宿舍，旧的tp-link路由器搬东西的时候坏了，于是去闲鱼上50元淘了个刷好了openwrt的极路由4，路由器是有点老，但是好在人家便宜，刷上openwrt玩法也多，经过在网上查阅资料，成功配置好了双wan接入，配置好负载均衡后可叠加网速（其实相对于校园网来说电信宽带50M带宽实属有点捉襟见肘，但是人家有公网IPV4啊），配合HFUT校园网自动">
+    <meta name="description" content="网络层 一、网络层的功能 （一）异构网络互连 （二）路由和转发 （三）SDN 基本概念 （四）阻塞控制 二、路由算法 （一）静态路由与动态路由 （二）距离-向量路由算法 （三）链路状态路由算法 （四）层次路由 三、IPv4 （一）IPv4 分组 （二）IPv4 地址与 NAT （三）子网划分、路由聚集、子网掩码与 CIDR 1. 子网划分 2. 路由聚集 3. 子网掩码 4. CIDR （四）AR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenWrt简易校园网自动认证+双WAN配置">
-<meta property="og:url" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="计算机网络——网络层">
+<meta property="og:url" content="https://blog.cxhap.top/2024/08/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
 <meta property="og:site_name" content="DingWH03&#39;s Blog">
-<meta property="og:description" content="OpenWrt校园网自动认证+双WAN配置 最近换了新宿舍，旧的tp-link路由器搬东西的时候坏了，于是去闲鱼上50元淘了个刷好了openwrt的极路由4，路由器是有点老，但是好在人家便宜，刷上openwrt玩法也多，经过在网上查阅资料，成功配置好了双wan接入，配置好负载均衡后可叠加网速（其实相对于校园网来说电信宽带50M带宽实属有点捉襟见肘，但是人家有公网IPV4啊），配合HFUT校园网自动">
+<meta property="og:description" content="网络层 一、网络层的功能 （一）异构网络互连 （二）路由和转发 （三）SDN 基本概念 （四）阻塞控制 二、路由算法 （一）静态路由与动态路由 （二）距离-向量路由算法 （三）链路状态路由算法 （四）层次路由 三、IPv4 （一）IPv4 分组 （二）IPv4 地址与 NAT （三）子网划分、路由聚集、子网掩码与 CIDR 1. 子网划分 2. 路由聚集 3. 子网掩码 4. CIDR （四）AR">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/1pppoe.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/3.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/4.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/5.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/6.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/7.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/8.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/9.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/10.png">
-<meta property="og:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/11.png">
-<meta property="article:published_time" content="2024-07-04T08:14:17.000Z">
+<meta property="article:published_time" content="2024-08-16T13:26:22.000Z">
 <meta property="article:modified_time" content="2024-08-17T01:39:39.159Z">
 <meta property="article:author" content="DingWH03">
-<meta property="article:tag" content="OpenWrt">
-<meta property="article:tag" content="网络配置">
-<meta property="article:tag" content="自动认证">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="网络层">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/1pppoe.png">
   
   
   
-  <title>OpenWrt简易校园网自动认证+双WAN配置 - DingWH03&#39;s Blog</title>
+  <title>计算机网络——网络层 - DingWH03&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -246,7 +235,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="OpenWrt简易校园网自动认证+双WAN配置"></span>
+            <span id="subtitle" data-typed-text="计算机网络——网络层"></span>
           
         </div>
 
@@ -257,8 +246,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-07-04 16:14" pubdate>
-          2024年7月4日 下午
+        <time datetime="2024-08-16 21:26" pubdate>
+          2024年8月16日 晚上
         </time>
       </span>
     
@@ -269,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          245 字
         
       </span>
     
@@ -280,7 +269,7 @@
         
         
         
-          14 分钟
+          3 分钟
         
       </span>
     
@@ -326,127 +315,52 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">OpenWrt简易校园网自动认证+双WAN配置</h1>
+            <h1 id="seo-header">计算机网络——网络层</h1>
             
             
               <div class="markdown-body">
                 
-                <h1>OpenWrt校园网自动认证+双WAN配置</h1>
-<p>最近换了新宿舍，旧的tp-link路由器搬东西的时候坏了，于是去闲鱼上50元淘了个刷好了openwrt的极路由4，路由器是有点老，但是好在人家便宜，刷上openwrt玩法也多，经过在网上查阅资料，成功配置好了双wan接入，配置好负载均衡后可叠加网速（其实相对于校园网来说电信宽带50M带宽实属有点捉襟见肘，但是人家有公网IPV4啊），配合HFUT校园网自动认证脚本可实现路由器端自动登录。</p>
-<h2 id="线路连接">线路连接</h2>
-<p>原生WAN口连接电信宽带，拨号上网，LAN1口配置成WAN2，直接接入校园网，或者接入已经接入校园网的并配置成关闭DHCP的路由器</p>
-<blockquote>
-<p>路由器关闭DHCP可视为AP模式，相当于交换机的功能，每个连接的用户可视为一个单独的用户，每个人都需要进行认证，每个人独立带宽。否则所有连接到路由器的人用同一个校园网账号上网。</p>
-</blockquote>
-<h2 id="宽带拨号上网">宽带拨号上网</h2>
-<p>登录openwrt，选择<strong>网络-&gt;接口-&gt;WAN</strong>，找到WAN点击编辑，将协议修改为PPPOE，并在下面设置好宽带账号密码即可。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/1pppoe.png" srcset="/img/loading.gif" lazyload class="" title="pppoe-wan">
-<blockquote>
-<p>若账号密码正确但始终无法拨号成功，检查线路连接正常后，拨打10000号人工客服解绑一下端口吧，换设备容易出现这种情况。<br>
-配置完成后记得点击<strong>保存并应用</strong>，这样才会生效。</p>
-</blockquote>
-<h2 id="设置LAN1为WAN2">设置LAN1为WAN2</h2>
-<p>首先在刚才的<strong>网络-&gt;接口</strong>页面，选择设备标签页，将LAN1先取消配置，然后从网桥设备中移除。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/3.png" srcset="/img/loading.gif" lazyload class="" title="从网桥中移除lan1">
-<p>然后选择添加设备，再将LAN1添加为<strong>网络设备</strong>，配置项保持默认即可保持默认即可。</p>
-<blockquote>
-<p>也许不用删除LAN1再添加，谁知道呢，反正我删除再添加没遇到问题。<br>
-再次来到<strong>接口</strong>页面，点击左下角添加新接口，名称为WAN2，协议选择DHCP客户端（自动获取ip地址），设备选择LAN1，然后为WAN2配置防火墙区域，放在外网WAN一组即可。</p>
-</blockquote>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/4.png" srcset="/img/loading.gif" lazyload class="" title="配置防火墙区域">
-<h2 id="为WAN与WAN2设置网关跃点">为WAN与WAN2设置网关跃点</h2>
-<p>跃点数决定了两个WAN的优先级，数字越小优先级越高，要配置下面的负载均衡一定要为WAN和WAN2设置成不同的跃点数，在<strong>网络-&gt;接口-&gt;WAN-&gt;编辑-&gt;高级设置-&gt;使用网关跃点进行设置</strong>，如下图。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/5.png" srcset="/img/loading.gif" lazyload class="" title="配置网关跃点">
-<h2 id="配置负载均衡">配置负载均衡</h2>
-<p>负载均衡的存在是为了让网络同时使用两条WAN接口，将WAN与WAN2配置成balanced可以实现网速叠加。</p>
-<h3 id="配置接口">配置接口</h3>
-<p>在<strong>网络-&gt;负载均衡-&gt;接口</strong>标签页中，若已有其他接口添加可以选择删除，然后为WAN、WAN2添加进接口中，只需要添加跟踪主机或ip地址即可，<a target="_blank" rel="noopener" href="http://xn--www-st5fh1bx7kgu8ahx6b.baidu.com">我选择的是www.baidu.com</a>，用于判断网络连接是否正常。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/6.png" srcset="/img/loading.gif" lazyload class="" title="MWAN接口">
-<p>然后为WAN2校园网接口添加<strong>刷新连接跟踪表</strong>，作用是后面需要实现的校园网自动登录。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/7.png" srcset="/img/loading.gif" lazyload class="" title="刷新连接跟踪表">
-<p>配置完成后如下图，显示出跃点数才算成功。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/8.png" srcset="/img/loading.gif" lazyload class="" title="接口配置成功">
-<h3 id="配置成员">配置成员</h3>
-<p>为两个接口配置成员即可，跃点数决定负载均衡优先级，一般相同即可，权重可配置成两条接入WAN带宽之比。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/9.png" srcset="/img/loading.gif" lazyload class="" title="成员配置">
-<h3 id="配置策略">配置策略</h3>
-<p>这里建议添加两个策略，一个是balanced均衡，另一个是wan2_only，及仅校园网。balanced选择两个成员，wan2_only选择wan2即可。</p>
-<blockquote>
-<p>在某些情况下，某些银行app以及部分使用https协议的应用，在双ip负载均衡条件下可能会报ip切换速度过快的警告，当然切换过快，毕竟一个应用数据通过两条线与服务器连接。</p>
-</blockquote>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/10.png" srcset="/img/loading.gif" lazyload class="" title="策略配置">
-<h3 id="配置规则">配置规则</h3>
-<p>为了配合前面我们添加的策略，我们添加两条规则，分别是Default_role和https，像下图这样配置即可。</p>
-<img src="/2024/07/04/2024-7-4-OpenWrt%E6%A0%A1%E5%9B%AD%E7%BD%91%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81-%E5%8F%8CWAN%E9%85%8D%E7%BD%AE/11.png" srcset="/img/loading.gif" lazyload class="" title="规则配置">
-<p>点击保存并应用后，至此算是配置成功了，但是当前还是不能访问网络，因为校园网登录还没实现。</p>
-<h2 id="校园网自动登录">校园网自动登录</h2>
-<p>这里我提供合肥工业大学合肥校区校园网自动登录脚本，其他学校的可以优先查找Github仓库，若找不到，技术强的大佬可以通过抓包的方式自行摸索。自动登录脚本参考自<a target="_blank" rel="noopener" href="https://github.com/HowardZorn/HFUT-DrCOM">合肥工业大学校园网自动登陆指南</a>，我为了做成自动化脚本稍微进行了一些改动。</p>
-<pre><code class="hljs">#!/bin/bash
-
-username=&quot;2022xxxxxx&quot;
-password=&quot;xxxxxx&quot;
-
-
-echo 'Checking IP address and network connectivity...'
-
-# Get the IP address of the current machine
-ip_address=$(ip -4 addr show lan1 | awk '/inet / &#123;print $2&#125;')
-
-# Function to test network connectivity
-check_network() &#123;
-    local url=&quot;http://detectportal.firefox.com/success.txt&quot;
-    local expected=&quot;success&quot;
-
-    # Use curl to fetch the content of the URL and store it in a variable
-    local content=$(curl --ipv4 --silent --max-time 5 --interface lan1 &quot;$url&quot;)
-    local result=$?
-
-    if [ $result -eq 0 ] &amp;&amp; [ &quot;$content&quot; = &quot;$expected&quot; ]; then
-#         echo &quot;Network connectivity test successful.&quot;
-        return 0  # Success
-    else
-#         echo &quot;Failed to establish network connectivity or content does not match.&quot;
-        return 1  # Failure
-    fi
-&#125;
-
-
-# Check if the IP address starts with &quot;170&quot; and if the network test times out
-if [[ $ip_address == 172.* ]]; then
-    echo 'IP address starts with 172.'
-    if ! check_network; then
-        echo 'Network test failed. Executing login script...'
-
-        # visit 172.16.200.11/12/13 to obtain the session giver URL.
-        # http://210.45.240.245/switch.php?xxxxx will give you the correct session id.
-        url=$(curl 172.16.200.13 --silent --interface lan1 | sed -n &quot;s/.*'\(.*\)'.*/\1/p&quot;)
-
-        # get PHP session
-        curl $url --cookie ./cookies --cookie-jar ./cookies --output /dev/null --silent --interface lan1
-
-        # login, phpsessid is a critical parameter.
-        curl http://210.45.240.245/post.php --cookie ./cookies --cookie-jar ./cookies --data-urlencode 'username='$username --data-urlencode 'password='$password --data-urlencode '0MKKey=%B5%C7+%C2%BC' --silent --interface lan1
-
-        # test
-        curl --ipv4 --silent --interface lan1 http://detectportal.firefox.com/success.txt
-
-        echo 'Login script executed.'
-    else
-        echo 'Network test succeeded. No need to execute login script.'
-    fi
-else
-    echo 'IP address does not start with 172. Skipping login script.'
-fi
-</code></pre>
-<p>将该脚本保存至/root/auto-login.sh，修改成正确的账号密码，授予可执行权限<code>chmod +x ./auto-login.sh</code>。<br>
-再次打开openwrt管理网页，找到<strong>网络-&gt;负载均衡-&gt;通知</strong>，将下面两行代码粘贴进文件最后两行，当WAN2状态改变时会自动执行这个脚本，登录到校园网。<br>
-bash /root/auto-login.sh &gt; /root/auto-login.log<br>
-date &gt; /root/flag</p>
-<blockquote>
-<p>还记得配置负载均衡的配置接口部分的<strong>刷新连接跟踪表</strong>吗，那玩意就是用来触发这个脚本的。</p>
-</blockquote>
-<h2 id="结束">结束</h2>
-<p>到这里OpenWrt简易校园网自动认证+双WAN配置基本上算是结束了，本人经验有限，也是在慢慢摸索中摸索出来的，如有错误欢迎指正，如愿意跟我交流或是有疑问可发邮件<a href="mailto:dingwh2023@126.com">dingwh2023@126.com</a>联系我。</p>
+                <h1>网络层</h1>
+<h2 id="一、网络层的功能">一、网络层的功能</h2>
+<h3 id="（一）异构网络互连">（一）异构网络互连</h3>
+<h3 id="（二）路由和转发">（二）路由和转发</h3>
+<h3 id="（三）SDN-基本概念">（三）SDN 基本概念</h3>
+<h3 id="（四）阻塞控制">（四）阻塞控制</h3>
+<h2 id="二、路由算法">二、路由算法</h2>
+<h3 id="（一）静态路由与动态路由">（一）静态路由与动态路由</h3>
+<h3 id="（二）距离-向量路由算法">（二）距离-向量路由算法</h3>
+<h3 id="（三）链路状态路由算法">（三）链路状态路由算法</h3>
+<h3 id="（四）层次路由">（四）层次路由</h3>
+<h2 id="三、IPv4">三、IPv4</h2>
+<h3 id="（一）IPv4-分组">（一）IPv4 分组</h3>
+<h3 id="（二）IPv4-地址与-NAT">（二）IPv4 地址与 NAT</h3>
+<h3 id="（三）子网划分、路由聚集、子网掩码与-CIDR">（三）子网划分、路由聚集、子网掩码与 CIDR</h3>
+<h4 id="1-子网划分">1. 子网划分</h4>
+<h4 id="2-路由聚集">2. 路由聚集</h4>
+<h4 id="3-子网掩码">3. 子网掩码</h4>
+<h4 id="4-CIDR">4. CIDR</h4>
+<h3 id="（四）ARP-协议、DHCP-协议与-ICMP-协议">（四）ARP 协议、DHCP 协议与 ICMP 协议</h3>
+<h4 id="1-ARP协议">1.ARP协议</h4>
+<h4 id="2-DHCP协议">2. DHCP协议</h4>
+<h4 id="3-ICMP协议">3. ICMP协议</h4>
+<h2 id="四、IPv6">四、IPv6</h2>
+<h3 id="（一）Ipv6-的主要特点">（一）Ipv6 的主要特点</h3>
+<h3 id="（二）IPv6-地址">（二）IPv6 地址</h3>
+<h2 id="五、路由协议">五、路由协议</h2>
+<h3 id="（一）自治系统">（一）自治系统</h3>
+<h3 id="（二）域内路由与域间路由">（二）域内路由与域间路由</h3>
+<h3 id="（三）RIP-路由协议">（三）RIP 路由协议</h3>
+<h3 id="（四）OSPF-路由协议">（四）OSPF 路由协议</h3>
+<h3 id="（五）BGP-路由协议">（五）BGP 路由协议</h3>
+<h2 id="六、IP组播">六、IP组播</h2>
+<h3 id="（一）组播的概念">（一）组播的概念</h3>
+<h3 id="（二）IP-组播地址">（二）IP 组播地址</h3>
+<h2 id="七、移动-IP">七、移动 IP</h2>
+<h3 id="（一）移动-IP-的概念">（一）移动 IP 的概念</h3>
+<h3 id="（二）移动-IP-的通信过程">（二）移动 IP 的通信过程</h3>
+<h2 id="八、网络层设备">八、网络层设备</h2>
+<h3 id="（一）路由器的组成和功能">（一）路由器的组成和功能</h3>
+<h3 id="（二）路由表与分组转发">（二）路由表与分组转发</h3>
 
                 
               </div>
@@ -465,7 +379,7 @@ date &gt; /root/flag</p>
     
       <span class="category-chain">
         
-  <a href="/categories/OpenWrt/" class="category-chain-item">OpenWrt</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="category-chain-item">计算机网络</a>
   
   
 
@@ -480,11 +394,11 @@ date &gt; /root/flag</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/OpenWrt/" class="print-no-link">#OpenWrt</a>
+        <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
       
-        <a href="/tags/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/" class="print-no-link">#网络配置</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="print-no-link">#计算机网络</a>
       
-        <a href="/tags/%E8%87%AA%E5%8A%A8%E8%AE%A4%E8%AF%81/" class="print-no-link">#自动认证</a>
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" class="print-no-link">#网络层</a>
       
     </div>
   
@@ -496,8 +410,8 @@ date &gt; /root/flag</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>OpenWrt简易校园网自动认证+双WAN配置</div>
-      <div>https://blog.cxhap.top/2024/07/04/2024-7-4-OpenWrt校园网自动认证-双WAN配置/</div>
+      <div>计算机网络——网络层</div>
+      <div>https://blog.cxhap.top/2024/08/16/计算机网络——网络层/</div>
     </div>
     <div class="license-meta">
       
@@ -509,7 +423,7 @@ date &gt; /root/flag</p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年7月4日</div>
+          <div>2024年8月16日</div>
         </div>
       
       
@@ -547,9 +461,9 @@ date &gt; /root/flag</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/06/2024-7-6-%E4%BD%BF%E7%94%A8Github-Pages%E4%B8%8EActions%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAHexo%E5%8D%9A%E5%AE%A2/" title="使用Github Pages与Actions搭建个人Hexo博客">
+                      <a href="/2024/08/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E4%BC%A0%E8%BE%93%E5%B1%82/" title="计算机网络——传输层">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用Github Pages与Actions搭建个人Hexo博客</span>
+                        <span class="hidden-mobile">计算机网络——传输层</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -557,8 +471,8 @@ date &gt; /root/flag</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/03/2024-7-3-%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
-                        <span class="hidden-mobile">测试文章</span>
+                      <a href="/2024/08/16/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/" title="计算机网络——数据链路层">
+                        <span class="hidden-mobile">计算机网络——数据链路层</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
