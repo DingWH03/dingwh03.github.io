@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
   
-    <link rel="canonical" href="https://blog.cxhap.top/2024/08/18/计算机组成原理——计算机系统概述/"/>
+    <link rel="canonical" href="https://blog.cxhap.top/2024/08/19/计算机操作系统——进程管理/"/>
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -23,24 +23,24 @@
   <meta name="author" content="DingWH03">
   <meta name="keywords" content="">
   
-    <meta name="description" content="计算机系统概述 一、计算机系统层次结构 （一）计算机系统的基本组成 （二）计算机硬件的基本结构 （三）计算机软件和硬件的关系 （四）计算机系统的工作原理 “存储程序”工作方式，高级语言程序与机器语言程序之间的转换，程序和指令的执行过程。 二、计算机的性能指标 吞吐量、响应时间;CPU 时钟周期、主频、CPI、CPU 执行时间;MIPS、 MFLOPS 、GFLOPS、TFLOPS、PFLOPS、E">
+    <meta name="description" content="进程管理 一、进程与线程 （一）进程与线程的基本概念 （二）进程的状态与转换 （三）线程的实现 1. 内核支持的线程 2. 线程库支持的线程 （四）进程与线程的组织与控制 （五） 进程间通信 1. 共享内存 2. 消息传递 3. 管道 二、CPU 调度与上下文切换 （一）调度的基本概念 （二）调度的目标 （三）调度的实现 1. 调度器&#x2F;调度程序(scheduler) 2. 调度的时机与调度方式 （">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机组成原理——计算机系统概述">
-<meta property="og:url" content="https://blog.cxhap.top/2024/08/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:title" content="计算机操作系统——进程管理">
+<meta property="og:url" content="https://blog.cxhap.top/2024/08/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="DingWH03&#39;s Blog">
-<meta property="og:description" content="计算机系统概述 一、计算机系统层次结构 （一）计算机系统的基本组成 （二）计算机硬件的基本结构 （三）计算机软件和硬件的关系 （四）计算机系统的工作原理 “存储程序”工作方式，高级语言程序与机器语言程序之间的转换，程序和指令的执行过程。 二、计算机的性能指标 吞吐量、响应时间;CPU 时钟周期、主频、CPI、CPU 执行时间;MIPS、 MFLOPS 、GFLOPS、TFLOPS、PFLOPS、E">
+<meta property="og:description" content="进程管理 一、进程与线程 （一）进程与线程的基本概念 （二）进程的状态与转换 （三）线程的实现 1. 内核支持的线程 2. 线程库支持的线程 （四）进程与线程的组织与控制 （五） 进程间通信 1. 共享内存 2. 消息传递 3. 管道 二、CPU 调度与上下文切换 （一）调度的基本概念 （二）调度的目标 （三）调度的实现 1. 调度器&#x2F;调度程序(scheduler) 2. 调度的时机与调度方式 （">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-18T12:27:01.000Z">
+<meta property="article:published_time" content="2024-08-19T12:45:01.000Z">
 <meta property="article:modified_time" content="2024-08-19T13:32:05.384Z">
 <meta property="article:author" content="DingWH03">
+<meta property="article:tag" content="计算机操作系统">
 <meta property="article:tag" content="笔记">
-<meta property="article:tag" content="计算机组成原理">
-<meta property="article:tag" content="计算机系统概述">
+<meta property="article:tag" content="进程管理">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>计算机组成原理——计算机系统概述 - DingWH03&#39;s Blog</title>
+  <title>计算机操作系统——进程管理 - DingWH03&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -235,7 +235,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="计算机组成原理——计算机系统概述"></span>
+            <span id="subtitle" data-typed-text="计算机操作系统——进程管理"></span>
           
         </div>
 
@@ -246,8 +246,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-18 20:27" pubdate>
-          2024年8月18日 晚上
+        <time datetime="2024-08-19 20:45" pubdate>
+          2024年8月19日 晚上
         </time>
       </span>
     
@@ -258,7 +258,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          134 字
+          358 字
         
       </span>
     
@@ -269,7 +269,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -315,20 +315,58 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">计算机组成原理——计算机系统概述</h1>
+            <h1 id="seo-header">计算机操作系统——进程管理</h1>
             
             
               <div class="markdown-body">
                 
-                <h1>计算机系统概述</h1>
-<h2 id="一、计算机系统层次结构">一、计算机系统层次结构</h2>
-<h3 id="（一）计算机系统的基本组成">（一）计算机系统的基本组成</h3>
-<h3 id="（二）计算机硬件的基本结构">（二）计算机硬件的基本结构</h3>
-<h3 id="（三）计算机软件和硬件的关系">（三）计算机软件和硬件的关系</h3>
-<h3 id="（四）计算机系统的工作原理">（四）计算机系统的工作原理</h3>
-<p>“存储程序”工作方式，高级语言程序与机器语言程序之间的转换，程序和指令的执行过程。</p>
-<h2 id="二、计算机的性能指标">二、计算机的性能指标</h2>
-<p>吞吐量、响应时间;CPU 时钟周期、主频、CPI、CPU 执行时间;MIPS、 MFLOPS 、GFLOPS、TFLOPS、PFLOPS、EFLOPS、ZFLOPS。</p>
+                <h1>进程管理</h1>
+<h2 id="一、进程与线程">一、进程与线程</h2>
+<h3 id="（一）进程与线程的基本概念">（一）进程与线程的基本概念</h3>
+<h3 id="（二）进程的状态与转换">（二）进程的状态与转换</h3>
+<h3 id="（三）线程的实现">（三）线程的实现</h3>
+<h4 id="1-内核支持的线程">1. 内核支持的线程</h4>
+<h4 id="2-线程库支持的线程">2. 线程库支持的线程</h4>
+<h3 id="（四）进程与线程的组织与控制">（四）进程与线程的组织与控制</h3>
+<h3 id="（五）-进程间通信">（五） 进程间通信</h3>
+<h4 id="1-共享内存">1. 共享内存</h4>
+<h4 id="2-消息传递">2. 消息传递</h4>
+<h4 id="3-管道">3. 管道</h4>
+<h2 id="二、CPU-调度与上下文切换">二、CPU 调度与上下文切换</h2>
+<h3 id="（一）调度的基本概念">（一）调度的基本概念</h3>
+<h3 id="（二）调度的目标">（二）调度的目标</h3>
+<h3 id="（三）调度的实现">（三）调度的实现</h3>
+<h4 id="1-调度器-调度程序-scheduler">1. 调度器/调度程序(scheduler)</h4>
+<h4 id="2-调度的时机与调度方式">2. 调度的时机与调度方式</h4>
+<p>（抢占式/非抢占式）</p>
+<h4 id="3-闲逛进程">3. 闲逛进程</h4>
+<h4 id="4-内核级线程与用户级线程调度">4. 内核级线程与用户级线程调度</h4>
+<h3 id="（四）典型调度算法">（四）典型调度算法</h3>
+<h4 id="1-先来先服务调度算法">1. 先来先服务调度算法</h4>
+<h4 id="2-短作业（短进程、短线程）优先调度算法">2. 短作业（短进程、短线程）优先调度算法</h4>
+<h4 id="3-时间片轮转调度算法">3. 时间片轮转调度算法</h4>
+<h4 id="4-优先级调度算法">4. 优先级调度算法</h4>
+<h4 id="5-高响应比优先调度算法">5. 高响应比优先调度算法</h4>
+<h4 id="6-多级队列调度算法">6. 多级队列调度算法</h4>
+<h4 id="7-多级反馈队列调度算法。">7. 多级反馈队列调度算法。</h4>
+<h4 id="（五）上下文及其切换机制">（五）上下文及其切换机制</h4>
+<h2 id="三、同步与互斥">三、同步与互斥</h2>
+<h3 id="（一）同步与互斥的基本概念">（一）同步与互斥的基本概念</h3>
+<h3 id="（二）基本的实现方法">（二）基本的实现方法</h3>
+<h4 id="1-软件方法">1. 软件方法</h4>
+<h4 id="2-硬件方法">2. 硬件方法</h4>
+<h3 id="（三）锁">（三）锁</h3>
+<h3 id="（四）信号量">（四）信号量</h3>
+<h3 id="（五）条件变量">（五）条件变量</h3>
+<h3 id="（六）经典同步问题">（六）经典同步问题</h3>
+<h4 id="1-生产者-消费者问题">1. 生产者-消费者问题</h4>
+<h4 id="2-读者-写者问题">2. 读者-写者问题</h4>
+<h4 id="3-哲学家进餐问题">3. 哲学家进餐问题</h4>
+<h2 id="四、死锁">四、死锁</h2>
+<h3 id="（一）死锁的基本概念">（一）死锁的基本概念</h3>
+<h3 id="（二）死锁预防">（二）死锁预防</h3>
+<h3 id="（三）死锁避免">（三）死锁避免</h3>
+<h3 id="（四）死锁检测和解除">（四）死锁检测和解除</h3>
 
                 
               </div>
@@ -347,7 +385,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="category-chain-item">计算机组成原理</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="category-chain-item">计算机操作系统</a>
   
   
 
@@ -362,11 +400,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="print-no-link">#计算机操作系统</a>
+      
         <a href="/tags/%E7%AC%94%E8%AE%B0/" class="print-no-link">#笔记</a>
       
-        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="print-no-link">#计算机组成原理</a>
-      
-        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/" class="print-no-link">#计算机系统概述</a>
+        <a href="/tags/%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86/" class="print-no-link">#进程管理</a>
       
     </div>
   
@@ -378,8 +416,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>计算机组成原理——计算机系统概述</div>
-      <div>https://blog.cxhap.top/2024/08/18/计算机组成原理——计算机系统概述/</div>
+      <div>计算机操作系统——进程管理</div>
+      <div>https://blog.cxhap.top/2024/08/19/计算机操作系统——进程管理/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +429,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月18日</div>
+          <div>2024年8月19日</div>
         </div>
       
       
@@ -429,18 +467,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E2%80%94%E2%80%94%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" title="计算机操作系统——操作系统基础">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">计算机操作系统——操作系统基础</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E6%A0%88%E3%80%81%E9%98%9F%E5%88%97%E5%92%8C%E6%95%B0%E7%BB%84/" title="数据结构——栈、队列和数组">
-                        <span class="hidden-mobile">数据结构——栈、队列和数组</span>
+                      <a href="/2024/08/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA%E5%92%8C%E8%BF%90%E7%AE%97/" title="计算机组成原理——数据的表示和运算">
+                        <span class="hidden-mobile">计算机组成原理——数据的表示和运算</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
