@@ -8,7 +8,7 @@
     <link href="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/"/>
     <url>/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/</url>
     
-    <content type="html"><![CDATA[<h2 id="一、查找设备Linux支持情况">一、查找设备Linux支持情况</h2><p>通常较旧的设备例如骁龙625/骁龙820/骁龙410等设备或是使用mtk处理器的chromebook有较好的PostmarketOS官方支持，可以通过查询<a href="https://wiki.postmarketos.org/wiki/Devices">postmarketOS Wiki-Devices</a>网站查看是否有自己的设备支持。此外，被官方支持的设备(例如红米2和红米note4x)大多数有第三方开发者移植自己的Ubuntu或是debian，更多预编译Linux内核与Rootfs可以在互联网上搜索，当然有想法折腾的也可以自己克隆源代码编译。</p><p>需要注意的是，大多数设备都不能完美的支持Linux，即刷入Linux系统后手机的部分甚至是大部分设备例如摄像头和扬声器甚至GPU都是无法工作的，仅仅可以完成特定工作，或者只是为了好玩，否则Linux绝对没有android系统更适合你的设备。</p><blockquote><p><em><strong>为什么Andorid设备可以启动Linux？甚至是Windows？</strong></em></p><p>通常，Android设备的引导程序是基于U-Boot或Bootloader等其他专有的引导加载程序，这与我们熟知的计算机有所不同。为了让Linux系统能够顺利启动，首先需要通过修改引导过程，使用像lk2nd这样的工具进行引导。lk2nd是一个轻量级的引导加载程序，bootloader引导lk2nd，lk2nd再去引导完整的linux内核，骁龙845设备利用UEFI启动Windows也是类似原理，但不是利用lk2nd。</p></blockquote><p>这里我使用的android设备是红米note4x，其采用骁龙625处理器，性能不高但好在功耗够低，并且二手机价格足够便宜，非常适合折腾刷机，可以看到官方对该型号的支持较好，网上还有许多大佬制作的其他Linux发行版，但是硬件驱动确实PostmarketOS做的最好，甚至电话短信都是正常的。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/supportinfo.png" class="" title="mido设备支持情况"><h2 id="二、刷入">二、刷入</h2><h3 id="1-下载或构建rom">1. 下载或构建rom</h3><p>对于PostmarketOS官方支持的设备，可前往<a href="https://images.postmarketos.org/bpo/">official images</a>下载预构建Rom，非官方支持的型号可使用pmbootstrap软件自行构建，这里暂不讨论。<br>在<a href="https://images.postmarketos.org/bpo/">official images</a>中，edge为滚动发行版本，软件为最新版。</p><p>其中<code>phosh</code>图形界面与<code>kde mobile</code>使用体验较好，可以自行选择体验。</p><h3 id="2-fastboot刷机">2. fastboot刷机</h3><p>下载下来的镜像通常会有3个，分别对应<code>lk2nd</code>、<code>boot</code>与<code>rootfs</code>，解压出img镜像后进行操作。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/screenshot-2024-11-06-14-21-29.png" class="" title="downloadrom"><p>首先将设备进入fastboot模式，刷入<code>lk2nd</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash boot xxx-lk2nd.img<br>fastboot reboot<br></code></pre></td></tr></table></figure><p>等重启后会进入lk2nd界面，在此界面会显示设备相关信息，继续使用fastboot命令分别刷入boot和rootfs到boot分区和userdata分区。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222452204.jpg" class="" title="lk2nd"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash boot xxx-boot.img<br>fastboot flash userdata xxx.img<br>fastboot reboot<br></code></pre></td></tr></table></figure><p>再次重启后，即可引导开机。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222544907.jpg" class="" title="photo"><h2 id="三、启动">三、启动</h2><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222616804.jpg" class="" title="photo"><p>由于我选择内置phosh图形界面，启动成功会进入phosh的锁屏界面，默认账户密码为147147，输入成功即可解锁，第一次开机会出现欢迎界面。使用图形界面正常的连接wifi后，记下IP地址，还需要打开<code>Settings-&gt;System-&gt;Secure Shell</code>才可以愉快的使用ssh连接。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_223924789.jpg" class="" title="photo"><p>不过可能是bug，我尝试在图形界面中启用ssh并不生效，只能在终端中手动使用命令启用了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo rc-update add sshd<br>sudo rc-service sshd start<br></code></pre></td></tr></table></figure><blockquote><p>使用sudo执行命令时，发现sudo自动被替换成了<code>doas</code>，据说会比sudo更安全。</p></blockquote><p>执行完成后，本以为可以远程ssh访问了，事情似乎没那么简单，出现了下面的错误，在我尝试几次仍然无法连接之后，又重试几次，登陆成功了。非常奇怪。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">dwh@pop-os ~ [255]&gt; ssh user@10.0.0.142<br>The authenticity of host <span class="hljs-string">&#x27;10.0.0.142 (10.0.0.142)&#x27;</span> can<span class="hljs-string">&#x27;t be established.</span><br><span class="hljs-string">ED25519 key fingerprint is SHA256:XeK2HjAjkr0hMIEalqMnb8a92Duve9Os805MRhp4r3g.</span><br><span class="hljs-string">This key is not known by any other names.</span><br><span class="hljs-string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span><br><span class="hljs-string">Warning: Permanently added &#x27;</span>10.0.0.142<span class="hljs-string">&#x27; (ED25519) to the list of known hosts.</span><br><span class="hljs-string">(user@10.0.0.142) Password:</span><br><span class="hljs-string">Connection closed by 10.0.0.142 port 22</span><br></code></pre></td></tr></table></figure><h2 id="四、配置系统">四、配置系统</h2><h3 id="1-更换软件源">1. 更换软件源</h3><p>上手一个全新的Linux第一步当然是更换软件源加速软件包下载，我直接使用ustc和tuna镜像源，直接将下面的配置内容放入<code>/etc/apk/repositories</code>即可。当然也可以使用其他镜像源。</p><p>postmarketOS默认是不安装<code>vim</code>的，但是支持<code>vi</code>。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">https://mirrors.tuna.tsinghua.edu.cn/postmarketOS/master<br>http://mirrors.ustc.edu.cn/alpine/edge/main<br>http://mirrors.ustc.edu.cn/alpine/edge/community<br>http://mirrors.ustc.edu.cn/alpine/edge/testing<br></code></pre></td></tr></table></figure><h3 id="2-软件包管理">2. 软件包管理</h3><p>postmarketOS基于alpine linux构建，使用apk管理软件包，常用操作如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apk update <span class="hljs-comment"># 更新软件源</span><br>sudo apk upgrade <span class="hljs-comment"># 更新软件包</span><br>sudo apk add fish <span class="hljs-comment"># 下载软件包</span><br>apk search fish <span class="hljs-comment"># 搜索软件包</span><br>sudo apk del fish <span class="hljs-comment"># 删除软件包</span><br></code></pre></td></tr></table></figure><h3 id="3-Shell">3. Shell</h3><p>默认的<code>ash</code>通常没有<code>fish</code>或配置过的<code>zsh</code>好用，为了简便，我直接选择了<code>fish</code>作为我的shell，但不作为默认shell，避免出现某些配置错误，在需要时输入<code>fish</code>即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apk add fish<br></code></pre></td></tr></table></figure><h3 id="4-新建账户">4. 新建账户</h3><p>系统内置账户<code>user</code>，密码为<code>147147</code>，但我们仍然可以创建新账户，同时保留原来的账户，旧账户用来图形界面登陆即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd <span class="hljs-comment"># 修改当前账户(user)密码</span><br>sudo useradd -m your_user_name <span class="hljs-comment"># -m表明需要创建home目录</span><br>sudo passwd your_user_name <span class="hljs-comment"># 修改新账户密码</span><br>sudo usermod -aG wheel,audio,input,video,netdev,plugdev,feedbackd your_user_name  <span class="hljs-comment"># 为新账户添加附属分组</span><br></code></pre></td></tr></table></figure><p>进行这些操作之后，新账户已经可以正常使用，并具有sudo权限，然后可以重新使用ssh登陆新账户。</p><h3 id="5-启用swap">5. 启用swap</h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="一、查找设备Linux支持情况">一、查找设备Linux支持情况</h2><p>通常较旧的设备例如骁龙625/骁龙820/骁龙410等设备或是使用mtk处理器的chromebook有较好的PostmarketOS官方支持，可以通过查询<a href="https://wiki.postmarketos.org/wiki/Devices">postmarketOS Wiki-Devices</a>网站查看是否有自己的设备支持。此外，被官方支持的设备(例如红米2和红米note4x)大多数有第三方开发者移植自己的Ubuntu或是debian，更多预编译Linux内核与Rootfs可以在互联网上搜索，当然有想法折腾的也可以自己克隆源代码编译。</p><p>需要注意的是，大多数设备都不能完美的支持Linux，即刷入Linux系统后手机的部分甚至是大部分设备例如摄像头和扬声器甚至GPU都是无法工作的，仅仅可以完成特定工作，或者只是为了好玩，否则Linux绝对没有android系统更适合你的设备。</p><blockquote><p><em><strong>为什么Andorid设备可以启动Linux？甚至是Windows？</strong></em></p><p>通常，Android设备的引导程序是基于U-Boot或Bootloader等其他专有的引导加载程序，这与我们熟知的计算机有所不同。为了让Linux系统能够顺利启动，首先需要通过修改引导过程，使用像lk2nd这样的工具进行引导。lk2nd是一个轻量级的引导加载程序，bootloader引导lk2nd，lk2nd再去引导完整的linux内核，骁龙845设备利用UEFI启动Windows也是类似原理，但不是利用lk2nd。</p></blockquote><p>这里我使用的android设备是红米note4x，其采用骁龙625处理器，性能不高但好在功耗够低，并且二手机价格足够便宜，非常适合折腾刷机，可以看到官方对该型号的支持较好，网上还有许多大佬制作的其他Linux发行版，但是硬件驱动确实PostmarketOS做的最好，甚至电话短信都是正常的。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/supportinfo.png" class="" title="mido设备支持情况"><h2 id="二、刷入">二、刷入</h2><h3 id="1-下载或构建rom">1. 下载或构建rom</h3><p>对于PostmarketOS官方支持的设备，可前往<a href="https://images.postmarketos.org/bpo/">official images</a>下载预构建Rom，非官方支持的型号可使用pmbootstrap软件自行构建，这里暂不讨论。<br>在<a href="https://images.postmarketos.org/bpo/">official images</a>中，edge为滚动发行版本，软件为最新版。</p><p>其中<code>phosh</code>图形界面与<code>kde mobile</code>使用体验较好，可以自行选择体验。</p><h3 id="2-fastboot刷机">2. fastboot刷机</h3><p>下载下来的镜像通常会有3个，分别对应<code>lk2nd</code>、<code>boot</code>与<code>rootfs</code>，解压出img镜像后进行操作。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/screenshot-2024-11-06-14-21-29.png" class="" title="downloadrom"><p>首先将设备进入fastboot模式，刷入<code>lk2nd</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash boot xxx-lk2nd.img<br>fastboot reboot<br></code></pre></td></tr></table></figure><p>等重启后会进入lk2nd界面，在此界面会显示设备相关信息，继续使用fastboot命令分别刷入boot和rootfs到boot分区和userdata分区。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222452204.jpg" class="" title="lk2nd"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash boot xxx-boot.img<br>fastboot flash userdata xxx.img<br>fastboot reboot<br></code></pre></td></tr></table></figure><p>再次重启后，即可引导开机。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222544907.jpg" class="" title="photo"><h2 id="三、启动">三、启动</h2><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222616804.jpg" class="" title="photo"><p>由于我选择内置phosh图形界面，启动成功会进入phosh的锁屏界面，默认账户密码为147147，输入成功即可解锁，第一次开机会出现欢迎界面。使用图形界面正常的连接wifi后，记下IP地址，还需要打开<code>Settings-&gt;System-&gt;Secure Shell</code>才可以愉快的使用ssh连接。</p><img src="/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_223924789.jpg" class="" title="photo"><p>不过可能是bug，我尝试在图形界面中启用ssh并不生效，只能在终端中手动使用命令启用了。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo rc-update add sshd<br>sudo rc-service sshd start<br></code></pre></td></tr></table></figure><blockquote><p>使用sudo执行命令时，发现sudo自动被替换成了<code>doas</code>，据说会比sudo更安全。</p></blockquote><p>执行完成后，本以为可以远程ssh访问了，事情似乎没那么简单，出现了下面的错误，在我尝试几次仍然无法连接之后，又重试几次，登陆成功了。非常奇怪。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">dwh@pop-os ~ [255]&gt; ssh user@10.0.0.142<br>The authenticity of host <span class="hljs-string">&#x27;10.0.0.142 (10.0.0.142)&#x27;</span> can<span class="hljs-string">&#x27;t be established.</span><br><span class="hljs-string">ED25519 key fingerprint is SHA256:XeK2HjAjkr0hMIEalqMnb8a92Duve9Os805MRhp4r3g.</span><br><span class="hljs-string">This key is not known by any other names.</span><br><span class="hljs-string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span><br><span class="hljs-string">Warning: Permanently added &#x27;</span>10.0.0.142<span class="hljs-string">&#x27; (ED25519) to the list of known hosts.</span><br><span class="hljs-string">(user@10.0.0.142) Password:</span><br><span class="hljs-string">Connection closed by 10.0.0.142 port 22</span><br></code></pre></td></tr></table></figure><h2 id="四、配置系统">四、配置系统</h2><h3 id="1-更换软件源">1. 更换软件源</h3><p>上手一个全新的Linux第一步当然是更换软件源加速软件包下载，我直接使用ustc和tuna镜像源，直接将下面的配置内容放入<code>/etc/apk/repositories</code>即可。当然也可以使用其他镜像源。</p><p>postmarketOS默认是不安装<code>vim</code>的，但是支持<code>vi</code>。</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">https://mirrors.tuna.tsinghua.edu.cn/postmarketOS/master<br>http://mirrors.ustc.edu.cn/alpine/edge/main<br>http://mirrors.ustc.edu.cn/alpine/edge/community<br>http://mirrors.ustc.edu.cn/alpine/edge/testing<br></code></pre></td></tr></table></figure><h3 id="2-软件包管理">2. 软件包管理</h3><p>postmarketOS基于alpine linux构建，使用apk管理软件包，常用操作如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apk update <span class="hljs-comment"># 更新软件源</span><br>sudo apk upgrade <span class="hljs-comment"># 更新软件包</span><br>sudo apk add fish <span class="hljs-comment"># 下载软件包</span><br>apk search fish <span class="hljs-comment"># 搜索软件包</span><br>sudo apk del fish <span class="hljs-comment"># 删除软件包</span><br></code></pre></td></tr></table></figure><h3 id="3-Shell">3. Shell</h3><p>默认的<code>ash</code>通常没有<code>fish</code>或配置过的<code>zsh</code>好用，为了简便，我直接选择了<code>fish</code>作为我的shell，但不作为默认shell，避免出现某些配置错误，在需要时输入<code>fish</code>即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apk add fish<br></code></pre></td></tr></table></figure><h3 id="4-新建账户">4. 新建账户</h3><p>系统内置账户<code>user</code>，密码为<code>147147</code>，但我们仍然可以创建新账户，同时保留原来的账户，旧账户用来图形界面登陆即可。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd <span class="hljs-comment"># 修改当前账户(user)密码</span><br>sudo useradd -m your_user_name <span class="hljs-comment"># -m表明需要创建home目录</span><br>sudo passwd your_user_name <span class="hljs-comment"># 修改新账户密码</span><br>sudo usermod -aG wheel,audio,input,video,netdev,plugdev,feedbackd your_user_name  <span class="hljs-comment"># 为新账户添加附属分组</span><br></code></pre></td></tr></table></figure><p>进行这些操作之后，新账户已经可以正常使用，并具有sudo权限，然后可以重新使用ssh登陆新账户。</p><h3 id="5-启用swap">5. 启用swap</h3><p>刷入的postmarketos默认是启用zram的，由于我将rootfs刷入<code>userdata</code>分区，<code>system</code>分区可以格式化作为<code>swap</code>来使用，当然也可以作为其他分区使用。</p><p>命令如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo mkswap /dev/disk/by-partlabel/system <span class="hljs-comment"># 格式化</span><br>sudo swapon /dev/disk/by-partlabel/system <span class="hljs-comment"># 启用所选分区</span><br></code></pre></td></tr></table></figure><p>这两条命令即可临时启用<code>system</code>分区作为swap，但不会开机应用，要想开机自动挂载需要将以下内容添加进入``文件末尾：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/dev/disk/by-partlabel/system    swap    swap    nofail  0 0<br></code></pre></td></tr></table></figure><p>使用<code>system</code>作为swap之前：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">free -m<br>              total        used        free      shared  buff/cache   available<br>Mem:           3560         567        2331         101         662        2812<br>Swap:          1780           0        1780<br></code></pre></td></tr></table></figure><p>挂载成功后：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">free -m<br>              total        used        free      shared  buff/cache   available<br>Mem:           3560         580        2327          93         654        2808<br>Swap:          4852           0        4852<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
@@ -233,9 +233,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>排序</tag>
       
@@ -266,9 +266,9 @@
     
     <tags>
       
-      <tag>计算机操作系统</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>计算机操作系统</tag>
       
       <tag>输入/输出(I/O)管理</tag>
       
@@ -299,9 +299,9 @@
     
     <tags>
       
-      <tag>计算机操作系统</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>计算机操作系统</tag>
       
       <tag>文件管理</tag>
       
@@ -365,9 +365,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>查找</tag>
       
@@ -398,9 +398,9 @@
     
     <tags>
       
-      <tag>计算机操作系统</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>计算机操作系统</tag>
       
       <tag>内存管理</tag>
       
@@ -464,9 +464,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>图</tag>
       
@@ -497,9 +497,9 @@
     
     <tags>
       
-      <tag>计算机操作系统</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>计算机操作系统</tag>
       
       <tag>进程管理</tag>
       
@@ -563,9 +563,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>树与二叉树</tag>
       
@@ -596,9 +596,9 @@
     
     <tags>
       
-      <tag>计算机操作系统</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>计算机操作系统</tag>
       
       <tag>操作系统基础</tag>
       
@@ -662,9 +662,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>栈</tag>
       
@@ -955,9 +955,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
     </tags>
     
@@ -1019,9 +1019,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>大O表示法</tag>
       
@@ -1052,9 +1052,9 @@
     
     <tags>
       
-      <tag>笔记</tag>
-      
       <tag>数据结构</tag>
+      
+      <tag>笔记</tag>
       
       <tag>线性表</tag>
       
@@ -1085,9 +1085,9 @@
     
     <tags>
       
-      <tag>计算机操作系统</tag>
-      
       <tag>笔记</tag>
+      
+      <tag>计算机操作系统</tag>
       
       <tag>发展历程</tag>
       

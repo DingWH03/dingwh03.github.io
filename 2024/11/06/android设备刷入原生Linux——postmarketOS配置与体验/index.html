@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://blog.cxhap.top/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_222616804.jpg">
 <meta property="og:image" content="https://blog.cxhap.top/2024/11/06/android%E8%AE%BE%E5%A4%87%E5%88%B7%E5%85%A5%E5%8E%9F%E7%94%9FLinux%E2%80%94%E2%80%94postmarketOS%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%BD%93%E9%AA%8C/AGC_20241106_223924789.jpg">
 <meta property="article:published_time" content="2024-11-06T08:36:03.000Z">
-<meta property="article:modified_time" content="2024-11-07T16:08:43.639Z">
+<meta property="article:modified_time" content="2024-11-08T14:19:52.750Z">
 <meta property="article:author" content="DingVero">
 <meta property="article:tag" content="刷机">
 <meta property="article:tag" content="android">
@@ -265,7 +265,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.5k 字
         
       </span>
     
@@ -276,7 +276,7 @@
         
         
         
-          11 分钟
+          13 分钟
         
       </span>
     
@@ -378,6 +378,15 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd <span class="hljs-comment"># 修改当前账户(user)密码</span><br>sudo useradd -m your_user_name <span class="hljs-comment"># -m表明需要创建home目录</span><br>sudo passwd your_user_name <span class="hljs-comment"># 修改新账户密码</span><br>sudo usermod -aG wheel,audio,input,video,netdev,plugdev,feedbackd your_user_name  <span class="hljs-comment"># 为新账户添加附属分组</span><br></code></pre></td></tr></table></figure>
 <p>进行这些操作之后，新账户已经可以正常使用，并具有sudo权限，然后可以重新使用ssh登陆新账户。</p>
 <h3 id="5-启用swap">5. 启用swap</h3>
+<p>刷入的postmarketos默认是启用zram的，由于我将rootfs刷入<code>userdata</code>分区，<code>system</code>分区可以格式化作为<code>swap</code>来使用，当然也可以作为其他分区使用。</p>
+<p>命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo mkswap /dev/disk/by-partlabel/system <span class="hljs-comment"># 格式化</span><br>sudo swapon /dev/disk/by-partlabel/system <span class="hljs-comment"># 启用所选分区</span><br></code></pre></td></tr></table></figure>
+<p>这两条命令即可临时启用<code>system</code>分区作为swap，但不会开机应用，要想开机自动挂载需要将以下内容添加进入``文件末尾：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">/dev/disk/by-partlabel/system    swap    swap    nofail  0 0<br></code></pre></td></tr></table></figure>
+<p>使用<code>system</code>作为swap之前：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">free -m<br>              total        used        free      shared  buff/cache   available<br>Mem:           3560         567        2331         101         662        2812<br>Swap:          1780           0        1780<br></code></pre></td></tr></table></figure>
+<p>挂载成功后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">free -m<br>              total        used        free      shared  buff/cache   available<br>Mem:           3560         580        2327          93         654        2808<br>Swap:          4852           0        4852<br></code></pre></td></tr></table></figure>
 
                 
               </div>
