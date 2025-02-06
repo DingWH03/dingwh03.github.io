@@ -23,15 +23,15 @@
   <meta name="author" content="DingWH03">
   <meta name="keywords" content="">
   
-    <meta name="description" content="线性表  线性结构的特点是：在数据元素的非空有限集中，(1)存在唯一的一个被称做“第一个”的数据元素；(2)存在唯一的一个被称做“最后一个”的数据元素；(3)除第一个之外，集合中的每个数据元素均只有一个前驱；(4)除最后一个之外，集合中每个数据元素均只有一个后继。  一、线性表的基本概念 （一）线性表的定义 线性表是由n个具有相同数据类型的数据元素组成的有限序列。其中n&gt;&#x3D;0，n为表长，当n">
+    <meta name="description" content="线性结构的特点是：在数据元素的非空有限集中，(1)存在唯一的一个被称做“第一个”的数据元素；(2)存在唯一的一个被称做“最后一个”的数据元素；(3)除第一个之外，集合中的每个数据元素均只有一个前驱；(4)除最后一个之外，集合中每个数据元素均只有一个后继。  一、线性表的基本概念 （一）线性表的定义 线性表是由n个具有相同数据类型的数据元素组成的有限序列。其中n&gt;&#x3D;0，n为表长，当n为0时线">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构——线性表">
 <meta property="og:url" content="https://blog.cxhap.top/2024/07/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E2%80%94%E2%80%94%E7%BA%BF%E6%80%A7%E8%A1%A8/index.html">
 <meta property="og:site_name" content="DingVero&#39;s Blog">
-<meta property="og:description" content="线性表  线性结构的特点是：在数据元素的非空有限集中，(1)存在唯一的一个被称做“第一个”的数据元素；(2)存在唯一的一个被称做“最后一个”的数据元素；(3)除第一个之外，集合中的每个数据元素均只有一个前驱；(4)除最后一个之外，集合中每个数据元素均只有一个后继。  一、线性表的基本概念 （一）线性表的定义 线性表是由n个具有相同数据类型的数据元素组成的有限序列。其中n&gt;&#x3D;0，n为表长，当n">
+<meta property="og:description" content="线性结构的特点是：在数据元素的非空有限集中，(1)存在唯一的一个被称做“第一个”的数据元素；(2)存在唯一的一个被称做“最后一个”的数据元素；(3)除第一个之外，集合中的每个数据元素均只有一个前驱；(4)除最后一个之外，集合中每个数据元素均只有一个后继。  一、线性表的基本概念 （一）线性表的定义 线性表是由n个具有相同数据类型的数据元素组成的有限序列。其中n&gt;&#x3D;0，n为表长，当n为0时线">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-23T00:45:58.000Z">
-<meta property="article:modified_time" content="2025-01-14T04:07:00.016Z">
+<meta property="article:modified_time" content="2025-02-06T12:50:24.288Z">
 <meta property="article:author" content="DingVero">
 <meta property="article:tag" content="笔记">
 <meta property="article:tag" content="数据结构">
@@ -322,8 +322,7 @@
             
               <div class="markdown-body">
                 
-                <h1>线性表</h1>
-<blockquote>
+                <blockquote>
 <p>线性结构的特点是：在数据元素的非空有限集中，(1)存在唯一的一个被称做“第一个”的数据元素；(2)存在唯一的一个被称做“最后一个”的数据元素；(3)除第一个之外，集合中的每个数据元素均只有一个前驱；(4)除最后一个之外，集合中每个数据元素均只有一个后继。</p>
 </blockquote>
 <h2 id="一、线性表的基本概念">一、线性表的基本概念</h2>
@@ -416,7 +415,7 @@
 <h6 id="插入元素">插入元素</h6>
 <p><code>ListInsert</code>与静态分配的最大区别在于，当顺序表空间不足时会自动完成内存扩展，再进行插入操作。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 插入</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">ListInsert</span><span class="hljs-params">(SeqList &amp;L, <span class="hljs-type">int</span> i, <span class="hljs-type">int</span> e)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">1</span> || i &gt; L.length + <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Full</span>(L)) <span class="hljs-built_in">IncreaseSize</span>(L, InitSize);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = L.length; j &gt;= i; --j) &#123;<br>        L.data[j] = L.data[j - <span class="hljs-number">1</span>];<br>    &#125;<br>    L.data[i - <span class="hljs-number">1</span>] = e;<br>    L.length++;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>其余代码与上述静态分配顺序表相同，不进行列举。</p>
+<p>其余代码与上述静态分配顺序表大体相同，不进行列举。</p>
 <h3 id="（二）链式存储">（二）链式存储</h3>
 <p>顺序表中元素的物理地址相邻且连续，并且每个元素的长度和大小完全一致，因此可以随机存取存储表中的任意元素。但是这种顺序存储结构也具有一个严重的问题，那就是在插入或删除中间元素时需要移动大量的元素，这在顺序表很长时需要消耗大量的时间。链式存储线性表不需要使用的地址连续的物理单元，不要求元素间物理地址上相邻，而是通过指针的形式指向该元素的上一个或下一个结点，因此链式存储线性表在插入和删除内部元素时无需移动其他元素，但这也导致无法随机存取内部元素。</p>
 <h4 id="1-线性链表的定义">1.线性链表的定义</h4>
@@ -436,14 +435,13 @@
 </ol>
 <h4 id="2-线性链表（单链表）的基本操作的实现">2.线性链表（单链表）的基本操作的实现</h4>
 <p>根据单链表是否带头结点，部分实现代码会有所不同，不同的代码会单独标注出来，相同的省略。<a href="">完整代码</a></p>
-<h5 id="1-带头结点的单链表">(1)带头结点的单链表</h5>
-<h6 id="初始化-2">初始化</h6>
+<h5 id="初始化-2">初始化</h5>
 <p>单链表的初始化如下，新建一个结点，数据域不赋值，由于初始化的单链表为空表，因此指针域为<code>nullptr</code>。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++">LinkList::<span class="hljs-built_in">LinkList</span>() &#123;<br>    head = <span class="hljs-keyword">new</span> LNode;<br>    head-&gt;next = <span class="hljs-literal">nullptr</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h6 id="求表长">求表长</h6>
+<h5 id="求表长">求表长</h5>
 <p>求表长操作，设置一个计数变量，从头结点开始，若该节点的指针域不为空则计数变量+1，直到当前结点指针域为空，返回计数变量。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">LinkList::length</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> </span>&#123;<br>    <span class="hljs-type">int</span> len=<span class="hljs-number">0</span>;<br>    LNode *L = head;<br>    <span class="hljs-keyword">while</span>(L-&gt;next!=<span class="hljs-literal">nullptr</span>)&#123;<br>        L=L-&gt;next;<br>        len++;<br>    &#125;<br>    <span class="hljs-keyword">return</span> len;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h6 id="按序号查找结点">按序号查找结点</h6>
+<h5 id="按序号查找结点">按序号查找结点</h5>
 <p>从单链表的第一个结点开始，沿着指针域依次向后搜索，直到找到第i个元素为止。如果给定序号不在链表范围内则查找失败。</p>
 <h2 id="三、线性表的应用">三、线性表的应用</h2>
 

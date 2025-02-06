@@ -23,12 +23,12 @@
   <meta name="author" content="DingWH03">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用Github Pages与Actions搭建个人Hexo博客 引言 作为一名计算机专业的学生，拥有一个自己的博客网站无疑是一件非常酷的事情。然而，搭建一个网站不仅需要完成大量的工作，还需要支付一定的费用来购买或租用服务器并进行维护。那么，有没有一种更简单的方法来搭建博客呢？答案是肯定的。正如标题所示，我们可以利用 GitHub Pages 来搭建一个全前端的网站，轻松实现我们的博客需求。 He">
+    <meta name="description" content="引言 作为一名计算机专业的学生，拥有一个自己的博客网站无疑是一件非常酷的事情。然而，搭建一个网站不仅需要完成大量的工作，还需要支付一定的费用来购买或租用服务器并进行维护。那么，有没有一种更简单的方法来搭建博客呢？答案是肯定的。正如标题所示，我们可以利用 GitHub Pages 来搭建一个全前端的网站，轻松实现我们的博客需求。 Hexo 介绍 Hexo 是一个快速、简洁且高效的静态博客框架。它使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Github Pages与Actions搭建个人Hexo博客">
 <meta property="og:url" content="https://blog.cxhap.top/2024/07/06/2024-7-6-%E4%BD%BF%E7%94%A8Github-Pages%E4%B8%8EActions%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAHexo%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="DingVero&#39;s Blog">
-<meta property="og:description" content="使用Github Pages与Actions搭建个人Hexo博客 引言 作为一名计算机专业的学生，拥有一个自己的博客网站无疑是一件非常酷的事情。然而，搭建一个网站不仅需要完成大量的工作，还需要支付一定的费用来购买或租用服务器并进行维护。那么，有没有一种更简单的方法来搭建博客呢？答案是肯定的。正如标题所示，我们可以利用 GitHub Pages 来搭建一个全前端的网站，轻松实现我们的博客需求。 He">
+<meta property="og:description" content="引言 作为一名计算机专业的学生，拥有一个自己的博客网站无疑是一件非常酷的事情。然而，搭建一个网站不仅需要完成大量的工作，还需要支付一定的费用来购买或租用服务器并进行维护。那么，有没有一种更简单的方法来搭建博客呢？答案是肯定的。正如标题所示，我们可以利用 GitHub Pages 来搭建一个全前端的网站，轻松实现我们的博客需求。 Hexo 介绍 Hexo 是一个快速、简洁且高效的静态博客框架。它使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.cxhap.top/2024/07/06/2024-7-6-%E4%BD%BF%E7%94%A8Github-Pages%E4%B8%8EActions%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAHexo%E5%8D%9A%E5%AE%A2/1.png">
 <meta property="og:image" content="https://blog.cxhap.top/2024/07/06/2024-7-6-%E4%BD%BF%E7%94%A8Github-Pages%E4%B8%8EActions%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAHexo%E5%8D%9A%E5%AE%A2/2.png">
@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://blog.cxhap.top/2024/07/06/2024-7-6-%E4%BD%BF%E7%94%A8Github-Pages%E4%B8%8EActions%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAHexo%E5%8D%9A%E5%AE%A2/5.png">
 <meta property="og:image" content="https://blog.cxhap.top/2024/07/06/2024-7-6-%E4%BD%BF%E7%94%A8Github-Pages%E4%B8%8EActions%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BAHexo%E5%8D%9A%E5%AE%A2/6.png">
 <meta property="article:published_time" content="2024-07-06T09:55:03.000Z">
-<meta property="article:modified_time" content="2025-01-14T04:07:00.078Z">
+<meta property="article:modified_time" content="2025-02-06T12:50:24.350Z">
 <meta property="article:author" content="DingVero">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="nodejs">
@@ -328,8 +328,7 @@
             
               <div class="markdown-body">
                 
-                <h1>使用Github Pages与Actions搭建个人Hexo博客</h1>
-<h2 id="引言">引言</h2>
+                <h2 id="引言">引言</h2>
 <p>作为一名计算机专业的学生，拥有一个自己的博客网站无疑是一件非常酷的事情。然而，搭建一个网站不仅需要完成大量的工作，还需要支付一定的费用来购买或租用服务器并进行维护。那么，有没有一种更简单的方法来搭建博客呢？答案是肯定的。正如标题所示，我们可以利用 GitHub Pages 来搭建一个全前端的网站，轻松实现我们的博客需求。</p>
 <h2 id="Hexo-介绍">Hexo 介绍</h2>
 <p>Hexo 是一个快速、简洁且高效的静态博客框架。它使用 Markdown 或其他渲染引擎生成静态文件，并且支持丰富的插件和主题，方便用户自定义博客的外观和功能。</p>
@@ -379,24 +378,41 @@
 <p>跳转到<a href="#%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2Hexo%E5%8D%9A%E5%AE%A2">本地部署Hexo博客</a>？</p>
 </blockquote>
 <ol>
-<li><strong>安装 Node.js 和 Git</strong>：Hexo 依赖于 Node.js 和 Git，首先需要在系统中安装这两个工具。</li>
-<li><strong>安装 Hexo</strong>：使用 npm（Node.js 包管理工具）安装 Hexo：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo-cli<br></code></pre></td></tr></table></figure>
+<li>
+<p><strong>安装 Node.js 和 Git</strong>：Hexo 依赖于 Node.js 和 Git，首先需要在系统中安装这两个工具。</p>
 </li>
-<li><strong>初始化博客</strong>：在目标目录下初始化一个新的 Hexo 博客：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo init my-blog<br><span class="hljs-built_in">cd</span> my-blog<br>npm install<br></code></pre></td></tr></table></figure>
+<li>
+<p><strong>安装 Hexo</strong>：使用 npm（Node.js 包管理工具）安装 Hexo：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g hexo-cli<br></code></pre></td></tr></table></figure>
 </li>
-<li><strong>创建文章</strong>：使用 Hexo 提供的命令创建新文章：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;My First Post&quot;</span><br></code></pre></td></tr></table></figure>
+<li>
+<p><strong>初始化博客</strong>：在目标目录下初始化一个新的 Hexo 博客：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo init my-blog<br><span class="hljs-built_in">cd</span> my-blog<br>npm install<br></code></pre></td></tr></table></figure>
 </li>
-<li><strong>生成和预览</strong>：生成静态文件并在本地服务器中预览博客：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo generate<br>hexo server<br></code></pre></td></tr></table></figure>
-在浏览器中访问 <code>http://localhost:4000</code> 查看博客效果。</li>
+<li>
+<p><strong>创建文章</strong>：使用 Hexo 提供的命令创建新文章：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;My First Post&quot;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li>
+<p><strong>生成和预览</strong>：生成静态文件并在本地服务器中预览博客：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo generate<br>hexo server<br></code></pre></td></tr></table></figure>
+<p>在浏览器中访问 <code>http://localhost:4000</code> 查看博客效果。</p>
+</li>
 </ol>
 <h3 id="部署到-GitHub-Pages">部署到 GitHub Pages</h3>
 <p>Hexo 提供了简便的部署命令，可以将生成的静态文件直接部署到 GitHub Pages：</p>
 <ol>
-<li><strong>配置部署信息</strong>：在博客根目录的 <code>_config.yml</code> 文件中配置 GitHub Pages 的仓库信息：<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/username/username.github.io.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></td></tr></table></figure>
+<li>
+<p><strong>配置部署信息</strong>：在博客根目录的 <code>_config.yml</code> 文件中配置 GitHub Pages 的仓库信息：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/username/username.github.io.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></td></tr></table></figure>
 </li>
-<li><strong>安装部署插件</strong>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
+<li>
+<p><strong>安装部署插件</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
 </li>
-<li><strong>执行部署命令</strong>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo deploy<br></code></pre></td></tr></table></figure>
+<li>
+<p><strong>执行部署命令</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">hexo deploy<br></code></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>通过以上步骤，你就可以轻松地将 Hexo 博客部署到 GitHub Pages 上，拥有一个免费的个人博客网站。</p>
@@ -710,9 +726,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/07/11/2024-7-11-2024%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E7%A7%91%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80-408-%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2/" title="2024计算机学科专业基础(408)考试大纲">
+                      <a href="/2024/07/11/2024-7-11-2024%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%AD%A6%E7%A7%91%E4%B8%93%E4%B8%9A%E5%9F%BA%E7%A1%80-408-%E8%80%83%E8%AF%95%E5%A4%A7%E7%BA%B2/" title="2025计算机学科专业基础(408)考试大纲">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">2024计算机学科专业基础(408)考试大纲</span>
+                        <span class="hidden-mobile">2025计算机学科专业基础(408)考试大纲</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
