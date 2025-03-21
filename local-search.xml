@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>数据库系统课程笔记</title>
+    <link href="/2025/03/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    <url>/2025/03/21/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="三、关系数据库标准语言SQL">三、关系数据库标准语言SQL</h2><h3 id="3-1-SQL概述">3.1 SQL概述</h3><p>SQL（Structured Query Language）即结构化查询语言，是关系数据库的标准语言。SQL是一个通用的、功能极强的关系数据库语言。</p><h4 id="3-1-1-SQL-的产生与发展">3.1.1 SQL 的产生与发展</h4><table><thead><tr><th>标准</th><th>大致页数</th><th>发布日期</th></tr></thead><tbody><tr><td>SQL/86</td><td></td><td>1986.10</td></tr><tr><td>SQL/89（FIPS 127-1）</td><td>120页</td><td>1989年</td></tr><tr><td>SQL/92</td><td>622页</td><td>1992年</td></tr><tr><td>SQL99（SQL 3）</td><td>1700页</td><td>1999年</td></tr><tr><td>SQL2003</td><td>3600页</td><td>2003年</td></tr><tr><td>SQL2008</td><td>3777页</td><td>2006年</td></tr><tr><td>SQL2011</td><td></td><td>2010年</td></tr></tbody></table><p>目前，没有一个数据库系统能够支持SQL标准的所有概念和特性.</p><h4 id="3-1-2-SQL的特点">3.1.2 SQL的特点</h4><ol><li>综合统一</li><li>高度非过程化</li><li>面向集合的操作方式</li><li>以同一种语法结构提供多种使用方式</li><li>语言简洁，易学易用</li></ol><h5 id="1-SQL特点：综合统一">1. SQL特点：综合统一</h5><ul><li>集数据定义语言（DDL），数据操纵语言（DML），数据控制语言（DCL）功能于一体。</li><li>可以独立完成数据库生命周期中的全部活动：<ul><li>定义关系模式，插入数据，建立数据库；</li><li>对数据库中的数据进行查询和更新；</li><li>数据库重构和维护</li><li>数据库安全性、完整性控制等</li></ul></li><li>用户数据库投入运行后，可根据需要随时逐步修改模式，不影响数据的运行。</li><li>数据操作符统一（数据结构：关系）</li></ul><h5 id="2-SQL特点：高度非过程化">2. SQL特点：高度非过程化</h5><ul><li>非关系数据模型的数据操纵语言“<strong>面向过程</strong>”，必须制定存取路径</li><li>SQL只要提出“<strong>做什么</strong>”，无须了解存取路径。</li><li>存取路径的选择以及SQL的操作过程由<strong>系统自动完成</strong>。</li><li>4GL：面向问题，描述性语言</li></ul><h5 id="3-SQL特点：面向集合的操作方式">3. SQL特点：面向集合的操作方式</h5><ul><li>非关系数据模型采用面向记录的操作方式，操作对象是一条记录</li><li>SQL采用集合操作方式<ul><li>操作对象、查找结果可以是元组的集合</li><li>一次插入、删除、更新操作的对象可以是元组的集合</li></ul></li></ul><h5 id="4-SQL特点：同一种语法结构，多种使用方式">4. SQL特点：同一种语法结构，多种使用方式</h5><ul><li>SQL是独立的语言<ul><li>能够独立地用于联机交互的使用方式</li></ul></li><li>SQL又是嵌入式语言<ul><li>SQL能够嵌入到高级语言（例如C，C++，Java）程序中，供程序员设计程序时使用</li></ul></li></ul><h5 id="5-SQL特点：语言简介，易学易用">5. SQL特点：语言简介，易学易用</h5><p>SQL功能极强，完成核心功能只用了9个动词。</p><table><thead><tr><th>SQL 功能</th><th>动词</th></tr></thead><tbody><tr><td>数据查询</td><td>SELECT</td></tr><tr><td>数据定义</td><td>CREATE，DROP，ALTER</td></tr><tr><td>数据操纵</td><td>INSERT，UPDATE DELETE</td></tr><tr><td>数据控制</td><td>GRANT，REVOKE</td></tr></tbody></table><h4 id="3-1-3-SQL的基本概念">3.1.3 SQL的基本概念</h4><p>SQL语言支持关系数据库三级模式结构</p><ul><li>外模式：视图（View）和部分基本表（Base table）</li><li>模式：若干基本表（Base table）</li><li>内模式：存储文件（stored file）</li></ul><pre><code class=" mermaid">graph TD;    SQL[&quot;SQL&quot;]    视图1[&quot;视图1&quot;]    视图2[&quot;视图2&quot;]    基本表1[&quot;基本表1&quot;]    基本表2[&quot;基本表2&quot;]    基本表3[&quot;基本表3&quot;]    基本表4[&quot;基本表4&quot;]    存储文件1[&quot;存储文件1&quot;]    存储文件2[&quot;存储文件2&quot;]    SQL --&gt; 视图1    SQL --&gt; 视图2    SQL --&gt; 基本表1    视图1 --&gt; 基本表1    视图1 --&gt; 基本表2    视图2 --&gt; 基本表3    视图2 --&gt; 基本表4    基本表1 --&gt; 存储文件1    基本表2 --&gt; 存储文件1    基本表3 --&gt; 存储文件1    基本表4 --&gt; 存储文件2    subgraph 外模式[外模式]        视图1        视图2    end    subgraph 模式[模式]        基本表1        基本表2        基本表3        基本表4    end    subgraph 内模式[内模式]        存储文件1        存储文件2    end</code></pre><h3 id="3-2-数据定义">3.2 数据定义</h3><ul><li>基本表<ul><li>本身独立存在的表，关系表，是<strong>实表</strong></li><li>SQL中一个关系就对应一个基本表</li><li>一个(或多个)基本表对应一个存储文件</li><li>一个表可以带若干索引</li></ul></li><li>存储文件<ul><li>逻辑结构组成了关系数据库的内模式</li><li>物理结构是任意的，<strong>对用户透明</strong></li></ul></li><li>视图<ul><li>从一个或几个基本表导出的表</li><li>数据库中只存放视图的定义而不存放视图对应的数据</li><li>视图是一个<strong>虚表</strong></li><li>用户可以在视图上再定义视图</li><li>例如，查询语句执行之后的结果</li></ul></li></ul><table>  <thead>    <tr>      <th rowspan="2" style="text-align: center;">操作对象</th>      <th colspan="3" style="text-align: center;">操作方式</th>    </tr>    <tr>      <th style="text-align: center;">创建</th>      <th style="text-align: center;">删除</th>      <th style="text-align: center;">修改</th>    </tr>  </thead>  <tbody>    <tr>      <td style="text-align: center;">模式</td>      <td style="text-align: center;">CREATE SCHEMA</td>      <td style="text-align: center;">DROP SCHEMA</td>      <td style="text-align: center;"></td>    </tr>    <tr>      <td style="text-align: center;">表</td>      <td style="text-align: center;">CREATE TABLE</td>      <td style="text-align: center;">DROP TABLE</td>      <td style="text-align: center;">ALTER TABLE</td>    </tr>    <tr>      <td style="text-align: center;">视图</td>      <td style="text-align: center;">CREATE VIEW</td>      <td style="text-align: center;">DROP VIEW</td>      <td style="text-align: center;"></td>    </tr>    <tr>      <td style="text-align: center;">索引</td>      <td style="text-align: center;">CREATE INDEX</td>      <td style="text-align: center;">DROP INDEX</td>      <td style="text-align: center;">ALTER INDEX</td>    </tr>  </tbody></table><h4 id="3-3-0-数据类型">3.3.0 数据类型</h4><ul><li>SQL中域的概念用数据类型来实现</li><li>定义表的属性时 需要指明其数据类型及长度</li><li>选用哪种数据类型<ul><li>取值范围</li><li>要做哪些运算</li></ul></li></ul><table><thead><tr><th>数据类型</th><th>含义</th></tr></thead><tbody><tr><td>CHAR(n), CHARACTER(n)</td><td>长度为n的定长字符串</td></tr><tr><td>VARCHAR(n), CHARACTERVARYING(n)</td><td>最大长度为n的变长字符串</td></tr><tr><td>CLOB</td><td>字符串大对象</td></tr><tr><td>BLOB</td><td>二进制大对象</td></tr><tr><td>INT, INTEGER</td><td>长整数（4字节）</td></tr><tr><td>SMALLINT</td><td>短整数（2字节）</td></tr><tr><td>BIGINT</td><td>大整数（8字节）</td></tr><tr><td>NUMERIC(p, d)</td><td>定点数，由p位数字（不包括符号、小数点）组成，小数后面有d位数字</td></tr><tr><td>DECIMAL(p, d), DEC(p, d)</td><td>同NUMERIC</td></tr><tr><td>REAL</td><td>取决于机器精度的单精度浮点数</td></tr><tr><td>DOUBLE PRECISION</td><td>取决于机器精度的双精度浮点数</td></tr><tr><td>FLOAT(n)</td><td>可选精度的浮点数，精度至少为n位数字</td></tr><tr><td>BOOLEAN</td><td>逻辑布尔量</td></tr><tr><td>DATE</td><td>日期，包含年、月、日，格式为YYYY-MM-DD</td></tr><tr><td>TIME</td><td>时间，包含一日的时、分、秒，格式为HH:MM:SS</td></tr><tr><td>TIMESTAMP</td><td>时间戳类型</td></tr><tr><td>INTERVAL</td><td>时间间隔类型</td></tr></tbody></table><h4 id="3-3-1-模式的定义与删除">3.3.1 模式的定义与删除</h4><h5 id="1-定义模式">1. 定义模式</h5><p><strong>CREATE SCHEMA</strong> <i>&lt;模式名&gt;</i> <strong>AUTHORIZATION</strong> <i>&lt;用户名&gt;</i>;</p><p>[ <i>&lt;表定义子句&gt;</i> | <i>&lt;视图定义子句&gt;</i> | <i>&lt;授权定义子句&gt;</i> ]</p><ul><li>如果没有指定&lt;模式名&gt;，隐含为&lt;用户名&gt;</li><li>调用该命令的用户必须拥有DBA权限，或者获得DBA授予的CREATE SCHEMA权限</li><li>定义模式实际上定义了一个命名空间<ul><li>在这个空间中可以定义该模式包含的数据库对象，例如基本表、视图、索引等。</li><li>在CREATE SCHEMA中可以接受CREATE TABLE，CREATE VIEW和GRANT子句</li></ul></li></ul><h5 id="2-删除模式">2. 删除模式</h5><p><strong>DROP SCHEMA</strong> <i>&lt;模式名&gt;</i> <strong>&lt;CASCADE|RESTRICT&gt;</strong> ;</p><ul><li>CASCADE(级联)<ul><li>删除模式的同时把该模式中所有的数据库对象全部删除</li></ul></li><li>RESTRICT(限制)<ul><li>如果该模式中定义了下属的数据库对象（如表、视图等），则拒绝该删除语句的执行。</li><li>当该模式中没有任何下属的对象时 才能执行。</li></ul></li></ul><h4 id="3-3-2-基本表的定义、删除与修改">3.3.2 基本表的定义、删除与修改</h4><h5 id="1-定义基本表">1. 定义基本表</h5><p><strong>CREATE TABLE</strong> &lt;表名&gt; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&lt;列名&gt;&lt;数据类型&gt;[&nbsp;&lt;列级完整性约束条件&gt;&nbsp;]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ , &lt;列名&gt;&lt;数据类型&gt;[&nbsp;&lt;列级完整性约束条件&gt;&nbsp;] ]<br>...[，&lt;表级完整性约束条件&gt; ] ) ;</p><ul><li>&lt;表名&gt;：所要定义的基本表的名字</li><li>&lt;列名&gt;：组成该表的各个属性（列）</li><li>&lt;列级完整性约束条件&gt;：涉及相应属性列的完整性约束条件</li><li>&lt;表级完整性约束条件&gt;：涉及一个或多个属性列的完整性约束条件</li></ul><p>如果完整性约束条件涉及到该表的多个属性列，则必须定义在表级上，否则既可以定义在列级也可以定义在表级</p><p>执行CREATE TABLE语句后：</p><ul><li>有关表的定义、约束条件定义等翻译成内部表、存储在系统<br>的数据字典中</li><li>数据库为基本表分配了（预留了）存储空间</li></ul><h5 id="2-模式与表">2. 模式与表</h5><ul><li><p>每一个基本表都属于某一个模式</p></li><li><p>一个模式包含多个基本表</p></li><li><p>定义基本表所属模式</p><ul><li>方法一：在表名中明显地给出模式名<ul><li>Create table <code>S-T</code>.Student（…）; /<em>模式名为 S-T</em>/</li><li>Create table <code>S-T</code>.Cource（…）;</li><li>Create table <code>S-T</code>.SC（…）;</li></ul></li><li>方法二：在创建模式语句中同时创建表</li><li>方法三：设置所属的模式<ul><li>例如Use <code>S-T</code>;</li></ul></li></ul></li><li><p>创建基本表（其他数据库对象也一样）时，若没有指定模式，系统根据搜索路径来确定该对象所属的模式</p></li><li><p>RDBMS会使用模式列表中第一个存在的模式作为数据库对象的模式名</p></li><li><p>若搜索路径中的模式名都不存在，系统将给出错误</p></li><li><p>显示当前的搜索路径： SHOW search_path;</p><ul><li>搜索路径的当前默认值是：$user， PUBLIC。其含义是首先搜索与用户名相同的模式名，如果该模式名不存在，则使用PUBLIC模式。</li></ul></li><li><p>DBA用户可以设置搜索路径，然后定义基本表</p></li></ul><p>例如</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SET</span> search_path <span class="hljs-keyword">TO</span> “S<span class="hljs-operator">-</span>T”，PUBLIC；<br><span class="hljs-keyword">Create</span> <span class="hljs-keyword">table</span> Student（......）; <br></code></pre></td></tr></table></figure><p>结果建立了S-T.Student基本表。RDBMS发现搜索路径中第一个模式名S-T存在，就把该模式作为基本表Student所属的模式。</p><blockquote><p>有些DBMS，如MYSQL，SQL SERVER，ORACLE，没有搜索路径的概念。</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习笔记</category>
+      
+      <category>数据库系统</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>笔记</tag>
+      
+      <tag>mysql</tag>
+      
+      <tag>数据库系统</tag>
+      
+      <tag>SQL</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mariadb在archlinux上的安装与配置</title>
     <link href="/2025/01/11/mariadb%E5%9C%A8archlinux%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/"/>
     <url>/2025/01/11/mariadb%E5%9C%A8archlinux%E4%B8%8A%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</url>
@@ -1115,9 +1148,7 @@
     
     <categories>
       
-      <category>0812计算机考研408</category>
-      
-      <category>个人笔记</category>
+      <category>学习笔记</category>
       
       <category>组合数学</category>
       
